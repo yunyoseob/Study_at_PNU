@@ -1,0 +1,173 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\bella\Desktop\식자경4-2\정보처리분석\20210920log.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}20 Sep 2021, 19:56:14
+
+{com}. sysuse auto
+{txt}(1978 Automobile Data)
+
+{com}. sysuse mlsw88
+{err}file "mlsw88.dta" not found
+{txt}{search r(601):r(601);}
+
+{com}. sysuse nlsw88
+{txt}(NLSW, 1988 extract)
+
+{com}. de
+
+{txt}Contains data from {res}C:\Program Files (x86)\Stata12\ado\base/n/nlsw88.dta
+{txt}  obs:{res}         2,246                          NLSW, 1988 extract
+{txt} vars:{res}            17                          1 May 2011 22:52
+{txt} size:{res}        60,642                          (_dta has notes)
+{txt}{hline}
+              storage  display     value
+variable name   type   format      label      variable label
+{hline}
+{p 0 48}{res}{bind:idcode         }{txt}{bind: int    }{bind:{txt}%8.0g      }{space 1}{bind:         }{bind:  }{res}{res}NLS id{p_end}
+{p 0 48}{bind:age            }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:         }{bind:  }{res}{res}age in current year{p_end}
+{p 0 48}{bind:race           }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:racelbl  }{bind:  }{res}{res}race{p_end}
+{p 0 48}{bind:married        }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:marlbl   }{bind:  }{res}{res}married{p_end}
+{p 0 48}{bind:never_married  }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:         }{bind:  }{res}{res}never married{p_end}
+{p 0 48}{bind:grade          }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:         }{bind:  }{res}{res}current grade completed{p_end}
+{p 0 48}{bind:collgrad       }{txt}{bind: byte   }{bind:{txt}%16.0g     }{space 1}{bind:gradlbl  }{bind:  }{res}{res}college graduate{p_end}
+{p 0 48}{bind:south          }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:         }{bind:  }{res}{res}lives in south{p_end}
+{p 0 48}{bind:smsa           }{txt}{bind: byte   }{bind:{txt}%9.0g      }{space 1}{bind:smsalbl  }{bind:  }{res}{res}lives in SMSA{p_end}
+{p 0 48}{bind:c_city         }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:         }{bind:  }{res}{res}lives in central city{p_end}
+{p 0 48}{bind:industry       }{txt}{bind: byte   }{bind:{txt}%23.0g     }{space 1}{bind:indlbl   }{bind:  }{res}{res}industry{p_end}
+{p 0 48}{bind:occupation     }{txt}{bind: byte   }{bind:{txt}%22.0g     }{space 1}{bind:occlbl   }{bind:  }{res}{res}occupation{p_end}
+{p 0 48}{bind:union          }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:unionlbl }{bind:  }{res}{res}union worker{p_end}
+{p 0 48}{bind:wage           }{txt}{bind: float  }{bind:{txt}%9.0g      }{space 1}{bind:         }{bind:  }{res}{res}hourly wage{p_end}
+{p 0 48}{bind:hours          }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:         }{bind:  }{res}{res}usual hours worked{p_end}
+{p 0 48}{bind:ttl_exp        }{txt}{bind: float  }{bind:{txt}%9.0g      }{space 1}{bind:         }{bind:  }{res}{res}total work experience{p_end}
+{p 0 48}{bind:tenure         }{txt}{bind: float  }{bind:{txt}%9.0g      }{space 1}{bind:         }{bind:  }{res}{res}job tenure (years){p_end}
+{txt}{hline}
+Sorted by:  {res}idcode
+
+{com}. tab race, gen(dum_race_)
+
+       {txt}race {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+      white {c |}{res}      1,637       72.89       72.89
+{txt}      black {c |}{res}        583       25.96       98.84
+{txt}      other {c |}{res}         26        1.16      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      2,246      100.00
+
+{com}. tab1 dum_race_1 dum_race_2 dum_race_3
+
+{res}-> tabulation of dum_race_1  
+
+{txt}race==white {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}        609       27.11       27.11
+{txt}          1 {c |}{res}      1,637       72.89      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      2,246      100.00
+
+-> tabulation of dum_race_2  
+
+{txt}race==black {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}      1,663       74.04       74.04
+{txt}          1 {c |}{res}        583       25.96      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      2,246      100.00
+
+-> tabulation of dum_race_3  
+
+{txt}race==other {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}      2,220       98.84       98.84
+{txt}          1 {c |}{res}         26        1.16      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      2,246      100.00
+
+{com}. xi i.race, noomit prefix(dum_)
+
+. save "C:\Program Files (x86)\Stata12\ado\base/n/nlsw88.dta", replace
+{err}{p 0 4 2}
+file C:\Program Files (x86)\Stata12\ado\base/n/nlsw88.dta
+is read-only; cannot be modified or erased
+{p_end}
+{txt}{search r(608):r(608);}
+
+{com}. use "C:\Users\bella\Desktop\식자경4-2\정보처리분석\★정보처리분석 데이터\STATA 기초적 이해와 활용\data6_1.dta", clear
+
+. de
+
+{txt}Contains data from {res}C:\Users\bella\Desktop\식자경4-2\정보처리분석\★정보처리분석 데이터\STATA 기초적 이해와 활용\data6_1.dta
+{txt}  obs:{res}           200                          
+{txt} vars:{res}             6                          16 Oct 2008 13:02
+{txt} size:{res}         4,800                          
+{txt}{hline}
+              storage  display     value
+variable name   type   format      label      variable label
+{hline}
+{p 0 48}{res}{bind:company        }{txt}{bind: float  }{bind:{txt}%9.0g      }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:year           }{txt}{bind: float  }{bind:{txt}%9.0g      }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:invest         }{txt}{bind: float  }{bind:{txt}%9.0g      }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:mvalue         }{txt}{bind: float  }{bind:{txt}%9.0g      }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:kstock         }{txt}{bind: float  }{bind:{txt}%9.0g      }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:time           }{txt}{bind: float  }{bind:{txt}%9.0g      }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{txt}{hline}
+Sorted by:  {res}company  year
+
+{com}. db egen
+
+. by company, sort : egen float max_invest = max(invest)
+
+. gen gap_invest=max_invest-invest
+
+. db egen
+
+. by year, sort : egen float pct_invest = pc(invest)
+
+. db egen
+
+. by year, sort : egen float pct_invest = rank(invest), field
+{err}pct_invest already defined
+{txt}{search r(110):r(110);}
+
+{com}. db egen
+
+. by year, sort : egen float rank_invest = rank(invest), field
+
+. use "C:\Users\bella\Desktop\식자경4-2\정보처리분석\★정보처리분석 데이터\STATA 기초적 이해와 활용\data6_2.dta", clear
+
+. de
+
+{txt}Contains data from {res}C:\Users\bella\Desktop\식자경4-2\정보처리분석\★정보처리분석 데이터\STATA 기초적 이해와 활용\data6_2.dta
+{txt}  obs:{res}         4,848                          
+{txt} vars:{res}             7                          16 Oct 2008 13:03
+{txt} size:{res}       271,488                          
+{txt}{hline}
+              storage  display     value
+variable name   type   format      label      variable label
+{hline}
+{p 0 48}{res}{bind:hhid04         }{txt}{bind: double }{bind:{txt}%10.0g     }{space 1}{bind:         }{bind:  }{res}{res}가구번호(7차, 2004){p_end}
+{p 0 48}{bind:debt1          }{txt}{bind: double }{bind:{txt}%10.0g     }{space 1}{bind:         }{bind:  }{res}{res}(조사당시) 부채잔액(만) - 1.금융기관 부�{p_end}
+{p 0 48}{bind:debt2          }{txt}{bind: double }{bind:{txt}%10.0g     }{space 1}{bind:         }{bind:  }{res}{res}(조사당시) 부채잔액(만) - 2.비금융기관 �{p_end}
+{p 0 48}{bind:debt3          }{txt}{bind: double }{bind:{txt}%10.0g     }{space 1}{bind:         }{bind:  }{res}{res}(조사당시) 부채잔액(만) - 3.개인적으로 �{p_end}
+{p 0 48}{bind:debt4          }{txt}{bind: double }{bind:{txt}%10.0g     }{space 1}{bind:         }{bind:  }{res}{res}(조사당시) 부채잔액(만) - 4.전세금,임대�{p_end}
+{p 0 48}{bind:debt5          }{txt}{bind: double }{bind:{txt}%10.0g     }{space 1}{bind:         }{bind:  }{res}{res}(조사당시) 부채잔액(만) - 5.미리 타고 앞{p_end}
+{p 0 48}{bind:debt6          }{txt}{bind: double }{bind:{txt}%10.0g     }{space 1}{bind:         }{bind:  }{res}{res}(조사당시) 부채잔액(만) - 6.기타{p_end}
+{txt}{hline}
+Sorted by:  
+
+{com}. gen rtotal=debt1+debt2+debt3+debt4+debt5+debt6
+{txt}(4848 missing values generated)
+
+{com}. db egen
+
+. egen float rtotal_debt = rowtotal(debt1 debt2 debt3 debt4 debt5 debt6)
+
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\bella\Desktop\식자경4-2\정보처리분석\20210920log.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}20 Sep 2021, 20:30:43
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}
