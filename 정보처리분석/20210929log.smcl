@@ -1,0 +1,279 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\bella\Desktop\식자경4-2\정보처리분석\log\20210929log.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}29 Sep 2021, 21:04:55
+
+{com}. use "C:\Users\bella\Desktop\식자경4-2\정보처리분석\★정보처리분석 데이터\STATA 기초적 이해와 활용\data7_1.dta", clear
+{txt}(VT town survey (Hamilton 1985))
+
+{com}. de
+
+{txt}Contains data from {res}C:\Users\bella\Desktop\식자경4-2\정보처리분석\★정보처리분석 데이터\STATA 기초적 이해와 활용\data7_1.dta
+{txt}  obs:{res}           153                          VT town survey (Hamilton 1985)
+{txt} vars:{res}             7                          16 Oct 2008 15:56
+{txt} size:{res}         1,071                          
+{txt}{hline}
+              storage  display     value
+variable name   type   format      label      variable label
+{hline}
+{p 0 48}{res}{bind:gender         }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:sexlbl   }{bind:  }{res}{res}Respondent's gender{p_end}
+{p 0 48}{bind:lived          }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:         }{bind:  }{res}{res}Years lived in town{p_end}
+{p 0 48}{bind:kids           }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:kidlbl   }{bind:  }{res}{res}Have children <19 in town?{p_end}
+{p 0 48}{bind:educ           }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:         }{bind:  }{res}{res}Highest year school completed{p_end}
+{p 0 48}{bind:meetings       }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:kidlbl   }{bind:  }{res}{res}Attended meetings on pollution{p_end}
+{p 0 48}{bind:contam         }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:contamlb }{bind:  }{res}{res}Believe own property/water contaminated{p_end}
+{p 0 48}{bind:school         }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:close    }{bind:  }{res}{res}School closing opinion{p_end}
+{txt}{hline}
+Sorted by:  
+
+{com}. su lived
+
+{txt}    Variable {c |}       Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 56}
+{space 7}lived {c |}{res}       153    19.26797    16.95466          1         81
+
+{com}. gen lived_s=(lived-r(mean))/r(sd)
+
+. su educ
+
+{txt}    Variable {c |}       Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 56}
+{space 8}educ {c |}{res}       153    12.95425    2.431536          6         20
+
+{com}. su lived_s
+
+{txt}    Variable {c |}       Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 56}
+{space 5}lived_s {c |}{res}       153           0           1   -1.07746   3.641006
+
+{com}. db tabstat
+
+. tabstat lived, statistics( mean median kurtosis skewness ) by(gender) format(%9.2f)
+
+{txt}Summary for variables: lived
+{col 6}by categories of: gender (Respondent's gender)
+
+{ralign 6:gender} {...}
+{c |}      mean       p50  kurtosis  skewness
+{hline 7}{c +}{hline 40}
+{ralign 6:male} {...}
+{c |}{...}
+ {res}    23.48     19.50      3.16      1.01
+{txt}{ralign 6:female} {...}
+{c |}{...}
+ {res}    16.55     13.00      3.87      1.13
+{txt}{hline 7}{c +}{hline 40}
+{ralign 6:Total} {...}
+{c |}{...}
+ {res}    19.27     15.00      4.03      1.21
+{txt}{hline 7}{c BT}{hline 40}
+
+{com}. db table
+
+. table gender kids
+
+{txt}{hline 10}{c TT}{hline 11}
+          {c |}    Have   
+          {c |}  children 
+Responden {c |}   <19 in  
+t's       {c |}   town?   
+gender    {c |}   no   yes
+{hline 10}{c +}{hline 11}
+     male {c |}   {res}26    34
+   {txt}female {c |}   {res}37    56
+{txt}{hline 10}{c BT}{hline 11}
+
+{com}. table gender
+
+{txt}{hline 10}{c TT}{hline 11}
+Responden {c |}
+t's       {c |}
+gender    {c |}      Freq.
+{hline 10}{c +}{hline 11}
+     male {c |}         {res}60
+   {txt}female {c |}         {res}93
+{txt}{hline 10}{c BT}{hline 11}
+
+{com}. db table
+
+. table gender kids, contents(mean lived median lived )
+
+{txt}{hline 10}{c TT}{hline 17}
+Responden {c |}Have children <19
+t's       {c |}     in town?    
+gender    {c |}      no      yes
+{hline 10}{c +}{hline 17}
+     male {c |} {res}32.0769  16.9118
+          {txt}{c |}    {res}27.5       12
+          {txt}{c |} 
+   female {c |} {res}24.1892     11.5
+          {txt}{c |}      {res}24        7
+{txt}{hline 10}{c BT}{hline 17}
+
+{com}. table gender kids educ
+
+{txt}{hline 10}{c TT}{hline 142}
+Responden {c |}                                         Highest year school completed and Have children <19 in town?                                         
+t's       {c |} {hline 3} 6 {hline 3}  {hline 3} 7 {hline 3}  {hline 3} 8 {hline 3}  {hline 3} 9 {hline 3}  {hline 3} 10 {hline 2}  {hline 3} 12 {hline 2}  {hline 3} 13 {hline 2}  {hline 3} 14 {hline 2}  {hline 3} 15 {hline 2}  {hline 3} 16 {hline 2}  {hline 3} 17 {hline 2}  {hline 3} 18 {hline 2}  {hline 3} 20 {hline 2}
+gender    {c |}   no  yes    no  yes    no  yes    no  yes    no  yes    no  yes    no  yes    no  yes    no  yes    no  yes    no  yes    no  yes    no  yes
+{hline 10}{c +}{hline 142}
+     male {c |}    {res}1                     4    1     2          1    1    10   15     2    1     2    6          1     2    7     1               2     1     
+   {txt}female {c |}     {res}               1     1          1    2          1    20   30     4    3     2    3     4    3     3   11          1     1    1     1     
+{txt}{hline 10}{c BT}{hline 142}
+
+{com}. table gender kids meetings
+
+{txt}{hline 10}{c TT}{hline 25}
+          {c |}   Attended meetings on  
+          {c |}    pollution and Have   
+Responden {c |}  children <19 in town?  
+t's       {c |} {hline 3} no {hline 3}    {hline 3} yes {hline 2}
+gender    {c |}   no   yes      no   yes
+{hline 10}{c +}{hline 25}
+     male {c |}   {res}21    21       5    13
+   {txt}female {c |}   {res}31    33       6    23
+{txt}{hline 10}{c BT}{hline 25}
+
+{com}. tab1 gender kids meetings
+
+{res}-> tabulation of gender  
+
+{txt}Respondent' {c |}
+   s gender {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+       male {c |}{res}         60       39.22       39.22
+{txt}     female {c |}{res}         93       60.78      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}        153      100.00
+
+-> tabulation of kids  
+
+       {txt}Have {c |}
+   children {c |}
+     <19 in {c |}
+      town? {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+         no {c |}{res}         63       41.18       41.18
+{txt}        yes {c |}{res}         90       58.82      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}        153      100.00
+
+-> tabulation of meetings  
+
+   {txt}Attended {c |}
+meetings on {c |}
+  pollution {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+         no {c |}{res}        106       69.28       69.28
+{txt}        yes {c |}{res}         47       30.72      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}        153      100.00
+
+{com}. tab2 gender kids meetings
+
+{res}-> tabulation of gender by kids  
+
+           {txt}{c |} Have children <19 in
+Respondent {c |}         town?
+ 's gender {c |}        no        yes {c |}     Total
+{hline 11}{c +}{hline 22}{c +}{hline 10}
+      male {c |}{res}        26         34 {txt}{c |}{res}        60 
+{txt}    female {c |}{res}        37         56 {txt}{c |}{res}        93 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+     Total {c |}{res}        63         90 {txt}{c |}{res}       153 
+
+
+-> tabulation of gender by meetings  
+
+           {txt}{c |} Attended meetings on
+Respondent {c |}       pollution
+ 's gender {c |}        no        yes {c |}     Total
+{hline 11}{c +}{hline 22}{c +}{hline 10}
+      male {c |}{res}        42         18 {txt}{c |}{res}        60 
+{txt}    female {c |}{res}        64         29 {txt}{c |}{res}        93 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+     Total {c |}{res}       106         47 {txt}{c |}{res}       153 
+
+
+-> tabulation of kids by meetings  
+
+      {txt}Have {c |}
+  children {c |} Attended meetings on
+    <19 in {c |}       pollution
+     town? {c |}        no        yes {c |}     Total
+{hline 11}{c +}{hline 22}{c +}{hline 10}
+        no {c |}{res}        52         11 {txt}{c |}{res}        63 
+{txt}       yes {c |}{res}        54         36 {txt}{c |}{res}        90 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+     Total {c |}{res}       106         47 {txt}{c |}{res}       153 
+
+
+{com}. tab2 gender
+{err}too few variables specified
+{txt}{search r(102):r(102);}
+
+{com}. tab gender meetings, exp chi2
+{txt}
+{c TLC}{hline 20}{c TRC}
+{c |} Key{col 22}{c |}
+{c LT}{hline 20}{c RT}
+{c |}{space 5}{it:frequency}{col 22}{c |}
+{c |}{space 1}{it:expected frequency}{col 22}{c |}
+{c BLC}{hline 20}{c BRC}
+
+           {c |} Attended meetings on
+Respondent {c |}       pollution
+ 's gender {c |}        no        yes {c |}     Total
+{hline 11}{c +}{hline 22}{c +}{hline 10}
+      male {c |}{res}        42         18 {txt}{c |}{res}        60 
+           {txt}{c |}{res}      41.6       18.4 {txt}{c |}{res}      60.0 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+    female {c |}{res}        64         29 {txt}{c |}{res}        93 
+           {txt}{c |}{res}      64.4       28.6 {txt}{c |}{res}      93.0 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+     Total {c |}{res}       106         47 {txt}{c |}{res}       153 
+           {txt}{c |}{res}     106.0       47.0 {txt}{c |}{res}     153.0 
+
+{txt}          Pearson chi2({res}1{txt}) = {res}  0.0240  {txt} Pr = {res}0.877
+
+{com}. 1+1
+{err}unrecognized command:  1 invalid command name
+{txt}{search r(199):r(199);}
+
+{com}. clear
+
+. db tabi
+
+. tabi 42 18 \ 64 29, chi2 expected
+{txt}
+{c TLC}{hline 20}{c TRC}
+{c |} Key{col 22}{c |}
+{c LT}{hline 20}{c RT}
+{c |}{space 5}{it:frequency}{col 22}{c |}
+{c |}{space 1}{it:expected frequency}{col 22}{c |}
+{c BLC}{hline 20}{c BRC}
+
+           {c |}          col
+       row {c |}         1          2 {c |}     Total
+{hline 11}{c +}{hline 22}{c +}{hline 10}
+         1 {c |}{res}        42         18 {txt}{c |}{res}        60 
+           {txt}{c |}{res}      41.6       18.4 {txt}{c |}{res}      60.0 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+         2 {c |}{res}        64         29 {txt}{c |}{res}        93 
+           {txt}{c |}{res}      64.4       28.6 {txt}{c |}{res}      93.0 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+     Total {c |}{res}       106         47 {txt}{c |}{res}       153 
+           {txt}{c |}{res}     106.0       47.0 {txt}{c |}{res}     153.0 
+
+{txt}          Pearson chi2({res}1{txt}) = {res}  0.0240  {txt} Pr = {res}0.877
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\bella\Desktop\식자경4-2\정보처리분석\log\20210929log.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}29 Sep 2021, 23:10:22
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}
